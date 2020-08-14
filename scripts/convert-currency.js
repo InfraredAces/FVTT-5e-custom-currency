@@ -1,15 +1,8 @@
 import Actor5e from "../../../systems/dnd5e/module/actor/entity.js";
 
 Hooks.once("init", () => {
-  console.log("convert-currency | Init")
-  game.settings.register("currencyConversion", "addConversion", {
-    name: "Adjust Currency Conversion",
-    hint: "Allows user to change the currency conversion rates for D&D 5E",
-    scope: "client",
-    config: true,
-    default: false,
-    type: Boolean
-  });
+  console.log("convert-currency | Init");
+  conversion_rates();
   patch_CurrencyConversion();
   console.log("convert-currency | patch_CurrencyConversion")
 
@@ -36,3 +29,13 @@ function patch_CurrencyConversion() {
         return this.update({"data.currency": curr});
     };
 };
+
+function conversion_rates() {
+    game.settings.register("currencyConversion", "cp-sp", {
+        name: "Copper to Silver Rate",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Number
+      });
+}
