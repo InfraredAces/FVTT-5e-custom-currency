@@ -15,7 +15,7 @@ Hooks.once("init", () => {
   });
   
 function patch_CurrencyConversion() {
-    rates = get_rates();
+    rates = get_conversion_rates();
 
     Actor5e.prototype.convertCurrency = function () {
         const curr = duplicate(this.data.data.currency);
@@ -34,7 +34,7 @@ function patch_CurrencyConversion() {
     };
 };
 
-function get_rates() {
+function get_conversion_rates() {
     return rates = {
         cp_sp: game.settings.get("currencyConversion", "cp-sp"),
         sp_ep: game.settings.get("currencyConversion", "sp-ep"),
