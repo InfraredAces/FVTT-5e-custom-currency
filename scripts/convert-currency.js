@@ -1,29 +1,26 @@
 import Actor5e from "../../../systems/dnd5e/module/actor/entity.js";
 
 Hooks.once("init", () => {
-  console.log("convert-currency | Init");
-  conversion_rates();
-  patch_CurrencyConversion();
-  console.log("convert-currency | patch_CurrencyConversion")
-
+    console.log("convert-currency | Init");
+    conversion_rates();
+    console.log("convert-currency | patch_CurrencyConversion")
 });
   
-  Hooks.on("ready", function() {
+Hooks.on("ready", function() {
     console.log("convert-currency | Ready");
-    conversion_rates();
     patch_CurrencyConversion();
-  });
+});
   
 function patch_CurrencyConversion() {
-    rates = get_conversion_rates();
+    const rates = get_conversion_rates();
 
     Actor5e.prototype.convertCurrency = function () {
         const curr = duplicate(this.data.data.currency);
         const convert = {
-            cp: {into: "sp", each: rates["cp-sp"]},
-            sp: {into: "ep", each: rates["sp-ep"]},
-            ep: {into: "gp", each: rates["ep-gp"]},
-            gp: {into: "pp", each: rates["gp-pp"]}
+          cp: {into: "sp", each: rates["cp_sp"]},
+          sp: {into: "ep", each: rates["sp_ep"]},
+          ep: {into: "gp", each: rates["ep_gp"]},
+          gp: {into: "pp", each: rates["gp_pp"]}
         };
         for ( let [c, t] of Object.entries(convert) ) {
             let change = Math.floor(curr[c] / t.each);
@@ -35,7 +32,7 @@ function patch_CurrencyConversion() {
 };
 
 function get_conversion_rates() {
-    return rates = {
+    return {
         cp_sp: game.settings.get("currencyConversion", "cp-sp"),
         sp_ep: game.settings.get("currencyConversion", "sp-ep"),
         ep_gp: game.settings.get("currencyConversion", "ep-gp"),
