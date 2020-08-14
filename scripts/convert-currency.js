@@ -10,6 +10,8 @@ Hooks.once("init", () => {
   
   Hooks.on("ready", function() {
     console.log("convert-currency | Ready");
+    conversion_rates();
+    patch_CurrencyConversion();
   });
   
 function patch_CurrencyConversion() {
