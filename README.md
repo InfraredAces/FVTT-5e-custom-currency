@@ -1,6 +1,6 @@
-# Lazy Money module for Foundry VTT
+# Currency Conversion module for Foundry VTT
 
-Easily add or remove currency with automatic conversion and no overdraft.
+Adjust currency conversion rates for 5th Edition D&D
 
 ## Preview
 
@@ -9,7 +9,7 @@ Easily add or remove currency with automatic conversion and no overdraft.
 1. Open Foundry's Setup screen
 2. Switch to the "Add-On Modules" tab
 3. Click "Install Module"
-4. Paste `https://github.com/DeVelox/lazymoney/raw/master/module.json` into the "Manifest URL" field
+4. Paste `https://github.com/ktrieun/FVTT-currency-conversion/raw/master/module.json` into the "Manifest URL" field
 5. Click "Install"
 
 ## Notes
