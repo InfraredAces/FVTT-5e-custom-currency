@@ -3,7 +3,7 @@
     "title": "Currency Conversion",
     "description": "Set the conversion rates for D&D 5E default currency.",
     "author": "ktrieun",
-    "version": "0.1.1",
+    "version": "1.0",
     "minimumCoreVersion": "0.6.0",
     "compatibleCoreVersion": "0.6.5",
     "system": "dnd5e",

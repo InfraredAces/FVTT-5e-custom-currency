@@ -12,7 +12,7 @@ Hooks.on("ready", function() {
 });
   
 function patch_CurrencyConversion() {
-    const rates = get_conversion_rates();
+    let rates = get_conversion_rates();
 
     Actor5e.prototype.convertCurrency = function () {
         const curr = duplicate(this.data.data.currency);
