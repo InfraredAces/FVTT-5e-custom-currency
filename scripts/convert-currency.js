@@ -3,12 +3,12 @@ import Actor5e from "../../../systems/dnd5e/module/actor/entity.js";
 Hooks.once("init", () => {
     console.log("convert-currency | Init");
     conversion_rates();
-    console.log("convert-currency | patch_CurrencyConversion")
 });
   
 Hooks.on("ready", function() {
     console.log("convert-currency | Ready");
     patch_CurrencyConversion();
+    console.log("convert-currency | patch_CurrencyConversion")
 });
   
 function patch_CurrencyConversion() {
