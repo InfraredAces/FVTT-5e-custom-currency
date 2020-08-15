@@ -21,3 +21,13 @@ Adjust currency conversion rates for 5th Edition D&D
 Currently supports any dnd5e character sheet that doesn't change the name of currency input fields.
 
 ## Changelog
+
+### 1.0
+
+- Release
+- Basic Currency Conversion Functionality
+- Allow users to set conversion rates
+
+### 1.1
+
+- Added rudimentary renaming capability through editing lang/en.json
