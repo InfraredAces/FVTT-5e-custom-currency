@@ -1,15 +1,15 @@
 Hooks.once("init", () => {
-    console.log("convert-currency | Init");
+    console.log("5e-exchange-rate | Init");
 
     conversion_rates();
-    console.log("convert-currency | Conversion Rates");
+    console.log("5e-exchange-rate | Conversion Rates");
 });
   
 Hooks.on("ready", function() {
-    console.log("convert-currency | Ready");
+    console.log("5e-exchange-rate | Ready");
     
     patch_currencyConversion();
-    console.log("convert-currency | patch_currencyConversion")
+    console.log("5e-exchange-rate | patch_currencyConversion")
 });
   
 function patch_currencyConversion() {
@@ -25,15 +25,15 @@ function patch_currencyConversion() {
 
 function get_conversion_rates() {
     return {
-        cp_sp: game.settings.get("currencyConversion", "cp-sp"),
-        sp_ep: game.settings.get("currencyConversion", "sp-ep"),
-        ep_gp: game.settings.get("currencyConversion", "ep-gp"),
-        gp_pp: game.settings.get("currencyConversion", "gp-pp")
+        cp_sp: game.settings.get("5e-exchange-rate", "cp-sp"),
+        sp_ep: game.settings.get("5e-exchange-rate", "sp-ep"),
+        ep_gp: game.settings.get("5e-exchange-rate", "ep-gp"),
+        gp_pp: game.settings.get("5e-exchange-rate", "gp-pp")
     }
 }
 
 function conversion_rates() {
-    game.settings.register("currencyConversion", "cp-sp", {
+    game.settings.register("5e-exchange-rate", "cp-sp", {
         name: "Copper to Silver",
         scope: "world",
         config: true,
@@ -43,7 +43,7 @@ function conversion_rates() {
             console.log(`CP to SP Setting changed to ${newValue}.`)
         }
     });
-    game.settings.register("currencyConversion", "sp-ep", {
+    game.settings.register("5e-exchange-rate", "sp-ep", {
         name: "Silver to Electrum",
         scope: "world",
         config: true,
@@ -53,17 +53,17 @@ function conversion_rates() {
             console.log(`SP to EP Setting changed to ${newValue}.`)
         }
     });
-    game.settings.register("currencyConversion", "ep-gp", {
+    game.settings.register("5e-exchange-rate", "ep-gp", {
         name: "Electrum to Gold",
         scope: "world",
         config: true,
         default: 2,
         type: Number,
         onChange: (newValue) => {
-            console.log(`EP to GP Setting changed to ${newValue}.`)
+            console.log(`5e-exchange-rate to ${newValue}.`)
         }
     });
-    game.settings.register("currencyConversion", "gp-pp", {
+    game.settings.register("5e-exchange-rate", "gp-pp", {
         name: "Gold to Platinum",
         scope: "world",
         config: true,
