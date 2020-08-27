@@ -40,4 +40,5 @@ Currently supports any dnd5e character sheet that doesn't change the name of cur
 
 ### 1.2
 
+* Change name from Currency Converter to 5th Edition Exchange Rate
 * Updated for change in Currency Conversion definition in Foundry 5E System
