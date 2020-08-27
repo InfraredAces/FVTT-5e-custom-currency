@@ -5,7 +5,7 @@
   "author": "ktrieun",
   "version": "1.2",
   "minimumCoreVersion": "0.6.0",
-  "compatibleCoreVersion": "0.6.5",
+  "compatibleCoreVersion": "0.6.6",
   "system": "dnd5e",
   "url": "https://github.com/ktrieun/FVTT-5e-exchange-rate",
   "manifest": "https://github.com/ktrieun/FVTT-5e-exchange-rate/raw/master/module.json",
