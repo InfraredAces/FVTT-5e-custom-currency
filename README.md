@@ -16,7 +16,7 @@ Adjust currency conversion rates for 5th Edition D&D
 
 * On saving the settings, refresh the screen in order to update the conversion rates.
 
-### Changing Currency Names
+### Changing Currency Names on Character Sheet
 
 * You will need access to the files on your Foundry Server.
 * In FoundryVTTModulePath/currencyConversion/lang/en.json, you will be able to change the name of the currency there.
