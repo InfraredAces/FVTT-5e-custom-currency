@@ -6,7 +6,7 @@ export const registerSettings = function () {
         config: true,
         default: 10,
         type: Number,
-        onChange: () => location.reload()
+        onChange: () => registerSettings()
     });
     game.settings.register("5e-exchange-rate", "sp-ep", {
         name: "Silver to Electrum",
@@ -14,7 +14,7 @@ export const registerSettings = function () {
         config: true,
         default: 5,
         type: Number,
-        onChange: () => location.reload()
+        onChange: () => registerSettings()
     });
     game.settings.register("5e-exchange-rate", "ep-gp", {
         name: "Electrum to Gold",
@@ -22,7 +22,7 @@ export const registerSettings = function () {
         config: true,
         default: 2,
         type: Number,
-        onChange: () => location.reload()
+        onChange: () => registerSettings()
     });
     game.settings.register("5e-exchange-rate", "gp-pp", {
         name: "Gold to Platinum",
@@ -30,6 +30,6 @@ export const registerSettings = function () {
         config: true,
         default: 10,
         type: Number,
-        onChange: () => location.reload()
+        onChange: () => registerSettings()
     });
 }
