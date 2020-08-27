@@ -1,5 +1,3 @@
-import Actor5e from "../../../systems/dnd5e/module/actor/entity.js";
-
 Hooks.once("init", () => {
     console.log("convert-currency | Init");
 
@@ -10,28 +8,19 @@ Hooks.once("init", () => {
 Hooks.on("ready", function() {
     console.log("convert-currency | Ready");
     
-    patch_CurrencyConversion();
-    console.log("convert-currency | patch_CurrencyConversion")
+    patch_currencyConversion();
+    console.log("convert-currency | patch_currencyConversion")
 });
   
-function patch_CurrencyConversion() {
+function patch_currencyConversion() {
     let rates = get_conversion_rates();
 
-    Actor5e.prototype.convertCurrency = function () {
-        const curr = duplicate(this.data.data.currency);
-        const convert = {
-          cp: {into: "sp", each: rates["cp_sp"]},
-          sp: {into: "ep", each: rates["sp_ep"]},
-          ep: {into: "gp", each: rates["ep_gp"]},
-          gp: {into: "pp", each: rates["gp_pp"]}
-        };
-        for ( let [c, t] of Object.entries(convert) ) {
-            let change = Math.floor(curr[c] / t.each);
-            curr[c] -= (change * t.each);
-            curr[t.into] += change;
-        }
-        return this.update({"data.currency": curr});
-    };
+    CONFIG.DND5E.currencyConversion = {
+        cp: {into: "sp", each: rates["cp_sp"]},
+        sp: {into: "ep", each: rates["sp_ep"]},
+        ep: {into: "gp", each: rates["ep_gp"]},
+        gp: {into: "pp", each: rates["gp_pp"]}
+    }
 };
 
 function get_conversion_rates() {
@@ -49,27 +38,39 @@ function conversion_rates() {
         scope: "world",
         config: true,
         default: 10,
-        type: Number
+        type: Number,
+        onChange: (newValue) => {
+            console.log(`CP to SP Setting changed to ${newValue}.`)
+        }
     });
     game.settings.register("currencyConversion", "sp-ep", {
         name: "Silver to Electrum",
         scope: "world",
         config: true,
         default: 5,
-        type: Number
+        type: Number,
+        onChange: (newValue) => {
+            console.log(`SP to EP Setting changed to ${newValue}.`)
+        }
     });
     game.settings.register("currencyConversion", "ep-gp", {
         name: "Electrum to Gold",
         scope: "world",
         config: true,
         default: 2,
-        type: Number
+        type: Number,
+        onChange: (newValue) => {
+            console.log(`EP to GP Setting changed to ${newValue}.`)
+        }
     });
     game.settings.register("currencyConversion", "gp-pp", {
         name: "Gold to Platinum",
         scope: "world",
         config: true,
         default: 10,
-        type: Number
+        type: Number,
+        onChange: (newValue) => {
+            console.log(`GP to PP Setting changed to ${newValue}.`)
+        }
     });
 }
