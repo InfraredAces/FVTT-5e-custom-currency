@@ -5,27 +5,31 @@ export const registerSettings = function () {
         scope: "world",
         config: true,
         default: 10,
-        type: Number
+        type: Number,
+        onChange: () => location.reload()
     });
     game.settings.register("5e-exchange-rate", "sp-ep", {
         name: "Silver to Electrum",
         scope: "world",
         config: true,
         default: 5,
-        type: Number
+        type: Number,
+        onChange: () => location.reload()
     });
     game.settings.register("5e-exchange-rate", "ep-gp", {
         name: "Electrum to Gold",
         scope: "world",
         config: true,
         default: 2,
-        type: Number
+        type: Number,
+        onChange: () => location.reload()
     });
     game.settings.register("5e-exchange-rate", "gp-pp", {
         name: "Gold to Platinum",
         scope: "world",
         config: true,
         default: 10,
-        type: Number
+        type: Number,
+        onChange: () => location.reload()
     });
 }
