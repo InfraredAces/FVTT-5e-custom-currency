@@ -1,17 +1,17 @@
 {
-  "name": "currencyConversion",
-  "title": "Currency Conversion",
+  "name": "5eExchangeRate",
+  "title": "5th Edition Exchange Rate",
   "description": "Set the conversion rates for D&D 5E default currency.",
   "author": "ktrieun",
-  "version": "1.1",
+  "version": "1.2",
   "minimumCoreVersion": "0.6.0",
   "compatibleCoreVersion": "0.6.5",
   "system": "dnd5e",
-  "url": "https://github.com/ktrieun/FVTT-currency-conversion",
-  "manifest": "https://github.com/ktrieun/FVTT-currency-conversion/raw/master/module.json",
-  "download": "https://github.com/ktrieun/FVTT-currency-conversion/archive/master.zip",
+  "url": "https://github.com/ktrieun/FVTT-5e-exchange-rate",
+  "manifest": "https://github.com/ktrieun/FVTT-5e-exchange-rate/raw/master/module.json",
+  "download": "https://github.com/ktrieun/FVTT-5e-exchange-rate/archive/master.zip",
   "esmodules": [
-    "scripts/convert-currency.js"
+    "scripts/5e-exchange-rate.js"
   ], 
   "languages": [
     {
