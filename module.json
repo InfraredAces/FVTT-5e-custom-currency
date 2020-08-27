@@ -1,6 +1,6 @@
 {
   "name": "5eExchangeRate",
-  "title": "5th Edition Exchange Rate",
+  "title": "5E Exchange Rate",
   "description": "Set the conversion rates for D&D 5E default currency.",
   "author": "ktrieun",
   "version": "1.2",
@@ -11,7 +11,7 @@
   "manifest": "https://github.com/ktrieun/FVTT-5e-exchange-rate/raw/master/module.json",
   "download": "https://github.com/ktrieun/FVTT-5e-exchange-rate/archive/master.zip",
   "esmodules": [
-    "scripts/5e-exchange-rate.js"
+    "module/5e-exchange-rate.js"
   ], 
   "languages": [
     {
