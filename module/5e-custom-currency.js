@@ -32,10 +32,10 @@ function patch_currencyConversion() {
 
 function get_conversion_rates() {
     return {
-        cp_sp: game.settings.get("5e-exchange-rate", "cp-sp"),
-        sp_ep: game.settings.get("5e-exchange-rate", "sp-ep"),
-        ep_gp: game.settings.get("5e-exchange-rate", "ep-gp"),
-        gp_pp: game.settings.get("5e-exchange-rate", "gp-pp")
+        cp_sp: game.settings.get("5e-custom-currency", "cp-sp"),
+        sp_ep: game.settings.get("5e-custom-currency", "sp-ep"),
+        ep_gp: game.settings.get("5e-custom-currency", "ep-gp"),
+        gp_pp: game.settings.get("5e-custom-currency", "gp-pp")
     }
 }
 
@@ -53,10 +53,10 @@ function patch_currencyNames() {
 
 function fetchParams() {
     return {
-        cpAlt: game.settings.get("5e-exchange-rate", "cpAlt"),
-        spAlt: game.settings.get("5e-exchange-rate", "spAlt"),
-        epAlt: game.settings.get("5e-exchange-rate", "epAlt"),
-        gpAlt: game.settings.get("5e-exchange-rate", "gpAlt"),
-        ppAlt: game.settings.get("5e-exchange-rate", "ppAlt")
+        cpAlt: game.settings.get("5e-custom-currency", "cpAlt"),
+        spAlt: game.settings.get("5e-custom-currency", "spAlt"),
+        epAlt: game.settings.get("5e-custom-currency", "epAlt"),
+        gpAlt: game.settings.get("5e-custom-currency", "gpAlt"),
+        ppAlt: game.settings.get("5e-custom-currency", "ppAlt")
     }
 }
