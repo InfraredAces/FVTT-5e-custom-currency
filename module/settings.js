@@ -6,40 +6,7 @@ function patch() {
     patch_currencyNames();
 }
 
-export const registerSettings = function () {
-    // Register any custom module settings here
-    game.settings.register("5e-custom-currency", "cp-sp", {
-        name: "Copper to Silver",
-        scope: "world",
-        config: true,
-        default: 10,
-        type: Number,
-        onChange: () => patch(),
-    });
-    game.settings.register("5e-custom-currency", "sp-ep", {
-        name: "Silver to Electrum",
-        scope: "world",
-        config: true,
-        default: 5,
-        type: Number,
-        onChange: () => patch(),
-    });
-    game.settings.register("5e-custom-currency", "ep-gp", {
-        name: "Electrum to Gold",
-        scope: "world",
-        config: true,
-        default: 2,
-        type: Number,
-        onChange: () => patch(),
-    });
-    game.settings.register("5e-custom-currency", "gp-pp", {
-        name: "Gold to Platinum",
-        scope: "world",
-        config: true,
-        default: 10,
-        type: Number,
-        onChange: () => patch(),
-    });
+export function registerSettingsCurrencyNames() {
     game.settings.register("5e-custom-currency", "cpAlt", {
         name: "Copper Alt Name",
         scope: "world",
@@ -78,6 +45,47 @@ export const registerSettings = function () {
         config: true,
         default: "Platinum",
         type: String,
+        onChange: () => patch(),
+    });
+}
+
+export function registerSettingsExchangeRate() {
+    let cpAlt = game.settings.get("5e-custom-currency", "cpAlt");
+    let spAlt = game.settings.get("5e-custom-currency", "spAlt");
+    let epAlt = game.settings.get("5e-custom-currency", "epAlt");
+    let gpAlt = game.settings.get("5e-custom-currency", "gpAlt");
+    let ppAlt = game.settings.get("5e-custom-currency", "ppAlt");
+    
+    game.settings.register("5e-custom-currency", "cp-sp", {
+        name:  cpAlt + " to " + spAlt,
+        scope: "world",
+        config: true,
+        default: 10,
+        type: Number,
+        onChange: () => patch(),
+    });
+    game.settings.register("5e-custom-currency", "sp-ep", {
+        name: spAlt + " to " + epAlt,
+        scope: "world",
+        config: true,
+        default: 5,
+        type: Number,
+        onChange: () => patch(),
+    });
+    game.settings.register("5e-custom-currency", "ep-gp", {
+        name: epAlt + " to " + gpAlt,
+        scope: "world",
+        config: true,
+        default: 2,
+        type: Number,
+        onChange: () => patch(),
+    });
+    game.settings.register("5e-custom-currency", "gp-pp", {
+        name: gpAlt + " to " + ppAlt,
+        scope: "world",
+        config: true,
+        default: 10,
+        type: Number,
         onChange: () => patch(),
     });
 }
