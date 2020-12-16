@@ -1,26 +1,35 @@
 // Import TypeScript modules
-import { registerSettingsExchangeRate } from "./settings.js";
-import { registerSettingsCurrencyNames } from "./settings.js";
+import { registerSettings } from "./settings.js";
 
 Hooks.once("init", () => {
     console.log("5e-custom-currency | Init");
 
-    registerSettingsCurrencyNames();
-    console.log("5e-custom-currency | Currency Names Registered");
-    
-    registerSettingsExchangeRate();
-    console.log("5e-custom-currency | Exchange Rates Registered");
+    registerSettings();
 });
   
 Hooks.on("ready", function() {
     console.log("5e-custom-currency | Ready");
-    
-    patch_currencyConversion();
-    console.log("5e-custom-currency | patch_currencyConversion");
 
     patch_currencyNames();
     console.log("5e-custom-currency | patch_currencyNames");
+    
+    if (game.settings.get("5e-custom-currency", "depCur"))
+    {
+        patch_currencyConversion();
+        console.log("5e-custom-currency | patch_currencyConversion");
+    }
+    else {
+        console.log("5e-custom-currency | Using Independent Currencies");
+        independentCurrency();
+    }
+});
 
+Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
+    if(!game.settings.get("5e-custom-currency", "depCur")) {
+        html.find('[class="currency-convert-button"]').remove();
+        html.find('[data-action="convertCurrency"]').remove();
+        html.find('[title="Convert Currency"]').remove();
+    }
 });
   
 export function patch_currencyConversion() {
@@ -63,4 +72,9 @@ function fetchParams() {
         gpAlt: game.settings.get("5e-custom-currency", "gpAlt"),
         ppAlt: game.settings.get("5e-custom-currency", "ppAlt")
     }
+}
+
+function independentCurrency() {
+    CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
+    };
 }
