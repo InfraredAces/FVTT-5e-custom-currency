@@ -1,11 +1,15 @@
 // Import TypeScript modules
-import { registerSettings } from "./settings.js";
+import { registerSettingsExchangeRate } from "./settings.js";
+import { registerSettingsCurrencyNames } from "./settings.js";
 
 Hooks.once("init", () => {
     console.log("5e-custom-currency | Init");
 
-    registerSettings();
-    console.log("5e-custom-currency | Settings Registered");
+    registerSettingsCurrencyNames();
+    console.log("5e-custom-currency | Currency Names Registered");
+    
+    registerSettingsExchangeRate();
+    console.log("5e-custom-currency | Exchange Rates Registered");
 });
   
 Hooks.on("ready", function() {
