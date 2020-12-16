@@ -2,8 +2,6 @@
 
 Adjust currency name and conversion rates for 5th Edition D&D
 
-## Preview
-
 ## Installation
 
 1. Open Foundry's Setup screen
