@@ -1,6 +1,6 @@
 export const registerSettings = function () {
     // Register any custom module settings here
-    game.settings.register("5e-exchange-rate", "cp-sp", {
+    game.settings.register("5e-custom-currency", "cp-sp", {
         name: "Copper to Silver",
         scope: "world",
         config: true,
@@ -8,7 +8,7 @@ export const registerSettings = function () {
         type: Number,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "sp-ep", {
+    game.settings.register("5e-custom-currency", "sp-ep", {
         name: "Silver to Electrum",
         scope: "world",
         config: true,
@@ -16,7 +16,7 @@ export const registerSettings = function () {
         type: Number,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "ep-gp", {
+    game.settings.register("5e-custom-currency", "ep-gp", {
         name: "Electrum to Gold",
         scope: "world",
         config: true,
@@ -24,7 +24,7 @@ export const registerSettings = function () {
         type: Number,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "gp-pp", {
+    game.settings.register("5e-custom-currency", "gp-pp", {
         name: "Gold to Platinum",
         scope: "world",
         config: true,
@@ -32,7 +32,7 @@ export const registerSettings = function () {
         type: Number,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "cpAlt", {
+    game.settings.register("5e-custom-currency", "cpAlt", {
         name: "Copper Alt Name",
         scope: "world",
         config: true,
@@ -40,7 +40,7 @@ export const registerSettings = function () {
         type: String,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "spAlt", {
+    game.settings.register("5e-custom-currency", "spAlt", {
         name: "Silver Alt Name",
         scope: "world",
         config: true,
@@ -48,7 +48,7 @@ export const registerSettings = function () {
         type: String,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "epAlt", {
+    game.settings.register("5e-custom-currency", "epAlt", {
         name: "Electrum Alt Name",
         scope: "world",
         config: true,
@@ -56,7 +56,7 @@ export const registerSettings = function () {
         type: String,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "gpAlt", {
+    game.settings.register("5e-custom-currency", "gpAlt", {
         name: "Gold Alt Name",
         scope: "world",
         config: true,
@@ -64,7 +64,7 @@ export const registerSettings = function () {
         type: String,
         onChange: () => window.location.reload()
     });
-    game.settings.register("5e-exchange-rate", "ppAlt", {
+    game.settings.register("5e-custom-currency", "ppAlt", {
         name: "Platinum Alt Name",
         scope: "world",
         config: true,
