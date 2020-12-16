@@ -1,6 +1,6 @@
-# 5E Exchange Rate module for Foundry VTT
+# 5E Custom Currency module for Foundry VTT
 
-Adjust currency conversion rates for 5th Edition D&D
+Adjust currency name and conversion rates for 5th Edition D&D
 
 ## Preview
 
