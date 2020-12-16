@@ -1,3 +1,11 @@
+import { patch_currencyConversion } from "./5e-custom-currency.js";
+import { patch_currencyNames } from "./5e-custom-currency.js";
+
+function patch() {
+    patch_currencyConversion();
+    patch_currencyNames();
+}
+
 export const registerSettings = function () {
     // Register any custom module settings here
     game.settings.register("5e-custom-currency", "cp-sp", {
@@ -6,7 +14,7 @@ export const registerSettings = function () {
         config: true,
         default: 10,
         type: Number,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "sp-ep", {
         name: "Silver to Electrum",
@@ -14,7 +22,7 @@ export const registerSettings = function () {
         config: true,
         default: 5,
         type: Number,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "ep-gp", {
         name: "Electrum to Gold",
@@ -22,7 +30,7 @@ export const registerSettings = function () {
         config: true,
         default: 2,
         type: Number,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "gp-pp", {
         name: "Gold to Platinum",
@@ -30,7 +38,7 @@ export const registerSettings = function () {
         config: true,
         default: 10,
         type: Number,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "cpAlt", {
         name: "Copper Alt Name",
@@ -38,7 +46,7 @@ export const registerSettings = function () {
         config: true,
         default: "Copper",
         type: String,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "spAlt", {
         name: "Silver Alt Name",
@@ -46,7 +54,7 @@ export const registerSettings = function () {
         config: true,
         default: "Silver",
         type: String,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "epAlt", {
         name: "Electrum Alt Name",
@@ -54,7 +62,7 @@ export const registerSettings = function () {
         config: true,
         default: "Electrum",
         type: String,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "gpAlt", {
         name: "Gold Alt Name",
@@ -62,7 +70,7 @@ export const registerSettings = function () {
         config: true,
         default: "Gold",
         type: String,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
     game.settings.register("5e-custom-currency", "ppAlt", {
         name: "Platinum Alt Name",
@@ -70,6 +78,6 @@ export const registerSettings = function () {
         config: true,
         default: "Platinum",
         type: String,
-        onChange: () => window.location.reload()
+        onChange: () => patch(),
     });
 }
