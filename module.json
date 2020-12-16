@@ -11,6 +11,6 @@
   "manifest": "https://github.com/ktrieun/FVTT-5e-custom-currency/raw/master/module.json",
   "download": "https://github.com/ktrieun/FVTT-5e-custom-currency/archive/master.zip",
   "esmodules": [
-    "module/5e-exchange-rate.js"
+    "module/5e-custom-currency.js"
   ]
 }
