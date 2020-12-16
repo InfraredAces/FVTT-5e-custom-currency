@@ -21,7 +21,7 @@ Adjust currency name and conversion rates for 5th Edition D&D
 
 Currently supports any dnd5e character sheet that uses the default currency names and exchange rates from the DND5E config.js file.
 
-### Compatible
+### Confirmed Compatible
 * Default 5e Character Sheet
 * Tidy5e Sheet
 * DNDBeyond Character Sheet for 5e
