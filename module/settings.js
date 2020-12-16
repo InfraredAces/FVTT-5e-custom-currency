@@ -6,7 +6,34 @@ function patch() {
     patch_currencyNames();
 }
 
-export function registerSettingsCurrencyNames() {
+export function registerSettings() {
+    registerSettingsCurrencyNames();
+    console.log("5e-custom-currency | Currency Names Registered");
+    
+    registerIndependentCurrencies();
+    console.log("5e-custom-currency | Currency Dependence Registered");
+    if (game.settings.get("5e-custom-currency", "depCur"))
+    {
+        registerSettingsExchangeRate();
+        console.log("5e-custom-currency | Exchange Rates Registered");
+    }
+}
+
+function registerIndependentCurrencies() {
+    game.settings.register("5e-custom-currency", "depCur", {
+        name: "Dependent Currencies",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+        onChange: () => {
+            patch();
+            window.location.reload();
+        }
+    })
+}
+
+function registerSettingsCurrencyNames() {
     game.settings.register("5e-custom-currency", "cpAlt", {
         name: "Copper Alt Name",
         scope: "world",
@@ -49,7 +76,7 @@ export function registerSettingsCurrencyNames() {
     });
 }
 
-export function registerSettingsExchangeRate() {
+function registerSettingsExchangeRate() {
     let cpAlt = game.settings.get("5e-custom-currency", "cpAlt");
     let spAlt = game.settings.get("5e-custom-currency", "spAlt");
     let epAlt = game.settings.get("5e-custom-currency", "epAlt");
