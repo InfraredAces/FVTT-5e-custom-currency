@@ -5,7 +5,7 @@ Hooks.once("init", () => {
     console.log("5e-custom-currency | Init");
 
     registerSettings();
-    console.log("5e-custom-currency | Conversion Rates");
+    console.log("5e-custom-currency | Settings Registered");
 });
   
 Hooks.on("ready", function() {
@@ -19,7 +19,7 @@ Hooks.on("ready", function() {
 
 });
   
-function patch_currencyConversion() {
+export function patch_currencyConversion() {
     let rates = get_conversion_rates();
 
     CONFIG.DND5E.currencyConversion = {
@@ -39,7 +39,7 @@ function get_conversion_rates() {
     }
 }
 
-function patch_currencyNames() {
+export function patch_currencyNames() {
     let altNames = fetchParams();
 
     CONFIG.DND5E.currencies = {
