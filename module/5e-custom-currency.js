@@ -2,20 +2,20 @@
 import { registerSettings } from "./settings.js";
 
 Hooks.once("init", () => {
-    console.log("5e-exchange-rate | Init");
+    console.log("5e-custom-currency | Init");
 
     registerSettings();
-    console.log("5e-exchange-rate | Conversion Rates");
+    console.log("5e-custom-currency | Conversion Rates");
 });
   
 Hooks.on("ready", function() {
-    console.log("5e-exchange-rate | Ready");
+    console.log("5e-custom-currency | Ready");
     
     patch_currencyConversion();
-    console.log("5e-exchange-rate | patch_currencyConversion");
+    console.log("5e-custom-currency | patch_currencyConversion");
 
     patch_currencyNames();
-    console.log("5e-exchange-rate | patch_currencyNames");
+    console.log("5e-custom-currency | patch_currencyNames");
 
 });
   
