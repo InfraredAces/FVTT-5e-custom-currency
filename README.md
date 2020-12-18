@@ -31,6 +31,7 @@ Currently supports any dnd5e character sheet that uses the default currency name
 * D&D 5e OGL Character Sheet
 * Compact DnDBeyond 5e Character Sheet
 * Lazy Money (if using Independent Currencies)
+* Pick-Up-Stix
 
 ## Changelog
 
