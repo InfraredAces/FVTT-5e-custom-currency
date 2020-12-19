@@ -54,6 +54,10 @@ Currently supports any dnd5e character sheet that uses the default currency name
 
 * Completed custom currency name feature and verified function in FVTT 0.7.8 and DND5E 0.99
 
-#### 1.31
+#### 1.3.1
 
 * Added Independent Currency Setting
+
+#### 1.3.2
+
+* Bug Fixes
