@@ -25,10 +25,10 @@ Currently supports any dnd5e character sheet that uses the default currency name
 * Default 5e Character Sheet
 * Tidy5e Sheet
 * DNDBeyond Character Sheet for 5e
+* D&D 5e OGL Character Sheet
 
 ### Not Compatible
 
-* D&D 5e OGL Character Sheet
 * Compact DnDBeyond 5e Character Sheet
 * Lazy Money (if using Independent Currencies)
 * Pick-Up-Stix
