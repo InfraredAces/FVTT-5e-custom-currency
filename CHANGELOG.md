@@ -26,3 +26,8 @@
 ### 1.3.2
 
 * Bug Fixes
+
+### 1.3.3
+
+* Added Custom Abbreviations
+* Added funstion to be compatible with Tidy5e Sheet update and D&D 5e OGL Character Sheet
