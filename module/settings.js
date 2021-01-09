@@ -3,7 +3,7 @@ import { patch_currencyNames } from "./5e-custom-currency.js";
 
 function patch() {
     registerSettingsCurrencyNames();
-    console.log("5e-custom-currency | New Currency Names Registered");
+    console.log("5e-custom-currency | New Currency Names/Abbreviations Registered");
     
     registerSettingsExchangeRate();
     console.log("5e-custom-currency | New Exchange Rates Registered");
@@ -14,7 +14,7 @@ function patch() {
 
 export function registerSettings() {
     registerSettingsCurrencyNames();
-    console.log("5e-custom-currency | Currency Names Registered");
+    console.log("5e-custom-currency | Currency Names/Abbreviations Registered");
     
     registerIndependentCurrencies();
     console.log("5e-custom-currency | Currency Dependence Registered");
@@ -48,11 +48,27 @@ function registerSettingsCurrencyNames() {
         type: String,
         onChange: () => patch(),
     });
+    game.settings.register("5e-custom-currency", "cpAltAbrv", {
+        name: "Copper Alt Abbreviation",
+        scope: "world",
+        config: true,
+        default: "CP",
+        type: String,
+        onChange: () => patch(),
+    });
     game.settings.register("5e-custom-currency", "spAlt", {
         name: "Silver Alt Name",
         scope: "world",
         config: true,
         default: "Silver",
+        type: String,
+        onChange: () => patch(),
+    });
+    game.settings.register("5e-custom-currency", "spAltAbrv", {
+        name: "Silver Alt Abbreviation",
+        scope: "world",
+        config: true,
+        default: "SP",
         type: String,
         onChange: () => patch(),
     });
@@ -64,6 +80,14 @@ function registerSettingsCurrencyNames() {
         type: String,
         onChange: () => patch(),
     });
+    game.settings.register("5e-custom-currency", "epAltAbrv", {
+        name: "Electrum Alt Abbreviation",
+        scope: "world",
+        config: true,
+        default: "EP",
+        type: String,
+        onChange: () => patch(),
+    });
     game.settings.register("5e-custom-currency", "gpAlt", {
         name: "Gold Alt Name",
         scope: "world",
@@ -72,11 +96,27 @@ function registerSettingsCurrencyNames() {
         type: String,
         onChange: () => patch(),
     });
+    game.settings.register("5e-custom-currency", "gpAltAbrv", {
+        name: "Gold Alt Abbreviation",
+        scope: "world",
+        config: true,
+        default: "GP",
+        type: String,
+        onChange: () => patch(),
+    });
     game.settings.register("5e-custom-currency", "ppAlt", {
         name: "Platinum Alt Name",
         scope: "world",
         config: true,
         default: "Platinum",
+        type: String,
+        onChange: () => patch(),
+    });
+    game.settings.register("5e-custom-currency", "ppAltAbrv", {
+        name: "Platinum Alt Abbreviation",
+        scope: "world",
+        config: true,
+        default: "PP",
         type: String,
         onChange: () => patch(),
     });
