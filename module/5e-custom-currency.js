@@ -30,6 +30,7 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
         html.find('[data-action="convertCurrency"]').remove();
         html.find('[title="Convert Currency"]').remove();
     }
+    alterCharacterCurrency(html);
 });
   
 export function patch_currencyConversion() {
@@ -70,11 +71,26 @@ function fetchParams() {
         spAlt: game.settings.get("5e-custom-currency", "spAlt"),
         epAlt: game.settings.get("5e-custom-currency", "epAlt"),
         gpAlt: game.settings.get("5e-custom-currency", "gpAlt"),
-        ppAlt: game.settings.get("5e-custom-currency", "ppAlt")
+        ppAlt: game.settings.get("5e-custom-currency", "ppAlt"),
+        cpAltAbrv: game.settings.get("5e-custom-currency", "cpAltAbrv"),
+        spAltAbrv: game.settings.get("5e-custom-currency", "spAltAbrv"),
+        epAltAbrv: game.settings.get("5e-custom-currency", "epAltAbrv"),
+        gpAltAbrv: game.settings.get("5e-custom-currency", "gpAltAbrv"),
+        ppAltAbrv: game.settings.get("5e-custom-currency", "ppAltAbrv"),
+
     }
 }
 
 function independentCurrency() {
     CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
     };
+}
+
+function alterCharacterCurrency(html) {
+    let altNames = fetchParams();
+    html.find('[class="denomination pp"]').text(altNames["ppAltAbrv"]);
+    html.find('[class="denomination gp"]').text(altNames["gpAltAbrv"]);
+    html.find('[class="denomination ep"]').text(altNames["epAltAbrv"]);
+    html.find('[class="denomination sp"]').text(altNames["spAltAbrv"]);
+    html.find('[class="denomination cp"]').text(altNames["cpAltAbrv"]);
 }
