@@ -30,5 +30,8 @@ Currently supports any dnd5e character sheet that uses the default currency name
 ### Not Compatible
 
 * Compact DnDBeyond 5e Character Sheet
-* Lazy Money (if using Independent Currencies)
+* LootSheet5e
 * Pick-Up-Stix
+
+### Not Compatible if using Independent Currencies
+* Lazy Money
