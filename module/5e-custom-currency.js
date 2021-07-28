@@ -32,6 +32,12 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
     }
     alterCharacterCurrency(html);
 });
+
+Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
+    if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
+        alterCharacterCurrency(html);
+    }
+});
   
 export function patch_currencyConversion() {
     let rates = get_conversion_rates();
