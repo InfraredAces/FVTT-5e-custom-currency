@@ -6,7 +6,7 @@ Hooks.once("init", () => {
 
     registerSettings();
 });
-  
+
 Hooks.on("ready", function() {
     console.log("5e-custom-currency | Ready");
 
@@ -33,22 +33,14 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
     alterCharacterCurrency(html);
 });
 
+// Compatibility
 Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
     if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
         alterCharacterCurrency(html);
     }
 });
-  
-export function patch_currencyConversion() {
-    let rates = get_conversion_rates();
 
-    CONFIG.DND5E.currencyConversion = {
-        cp: {into: "sp", each: rates["cp_sp"]},
-        sp: {into: "ep", each: rates["sp_ep"]},
-        ep: {into: "gp", each: rates["ep_gp"]},
-        gp: {into: "pp", each: rates["gp_pp"]}
-    }
-};
+// Function
 
 function get_conversion_rates() {
     return {
@@ -57,18 +49,6 @@ function get_conversion_rates() {
         ep_gp: game.settings.get("5e-custom-currency", "ep-gp"),
         gp_pp: game.settings.get("5e-custom-currency", "gp-pp")
     }
-}
-
-export function patch_currencyNames() {
-    let altNames = fetchParams();
-
-    CONFIG.DND5E.currencies = {
-        "pp": altNames["ppAlt"],
-        "gp": altNames["gpAlt"],
-        "ep": altNames["epAlt"],
-        "sp": altNames["spAlt"],
-        "cp": altNames["cpAlt"]
-    };
 }
 
 function fetchParams() {
@@ -87,8 +67,26 @@ function fetchParams() {
     }
 }
 
-function independentCurrency() {
-    CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
+export function patch_currencyConversion() {
+    let rates = get_conversion_rates();
+
+    CONFIG.DND5E.currencyConversion = {
+        cp: {into: "sp", each: rates["cp_sp"]},
+        sp: {into: "ep", each: rates["sp_ep"]},
+        ep: {into: "gp", each: rates["ep_gp"]},
+        gp: {into: "pp", each: rates["gp_pp"]}
+    }
+};
+
+export function patch_currencyNames() {
+    let altNames = fetchParams();
+
+    CONFIG.DND5E.currencies = {
+        "pp": altNames["ppAlt"],
+        "gp": altNames["gpAlt"],
+        "ep": altNames["epAlt"],
+        "sp": altNames["spAlt"],
+        "cp": altNames["cpAlt"]
     };
 }
 
@@ -99,4 +97,9 @@ function alterCharacterCurrency(html) {
     html.find('[class="denomination ep"]').text(altNames["epAltAbrv"]);
     html.find('[class="denomination sp"]').text(altNames["spAltAbrv"]);
     html.find('[class="denomination cp"]').text(altNames["cpAltAbrv"]);
+}
+
+function independentCurrency() {
+    CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
+    };
 }
