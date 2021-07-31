@@ -1,6 +1,7 @@
-// Import TypeScript modules
+// Import
 import { registerSettings } from "./settings.js";
 
+// Base Hooks
 Hooks.once("init", () => {
     console.log("5e-custom-currency | Init");
 
@@ -33,49 +34,7 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
     alterCharacterCurrency(html);
 });
 
-// Compatibility
-
-Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
-    if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
-        alterCharacterCurrency(html);
-    }
-});
-
-Hooks.on('renderTradeWindow', (sheet, html) => {
-    alterTradeWindowCurrency(html);
-});
-
-Hooks.on('renderDialog', (sheet, html) => {
-    if (game.modules.get('5e-custom-currency')?.active && sheet.title === 'Incoming Trade Request') {
-        alterTradeDialogCurrency(html);
-    }
-});
-
-function alterTradeDialogCurrency(html) {
-    let altNames = fetchParams();
-
-    const content = html.find('.dialog-content p');
-    const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
-    if (match) content.text(content.text().replace(match[1], ' ' + altNames[match[2] + "Alt"] + '.'));
-}
-
-function alterTradeWindowCurrency(html) {
-    let altNames = fetchParams();
-
-    ['pp', 'gp', 'ep', 'sp', 'cp'].forEach(dndCurrency => {
-        const container = html.find('[data-coin="' + dndCurrency + '"]').parent();
-        if (!container.length) return;
-
-        for (const [k, n] of Object.entries(container.contents())) {
-            if (n.nodeType === Node.TEXT_NODE) n.remove();
-        }
-
-        container.append(' ' + altNames[dndCurrency + "AltAbrv"]);
-        container.attr('title', altNames[dndCurrency + "Alt"]);
-    });
-}
-
-// Function
+//  Base Functions
 
 export function patch_currencyConversion() {
     let rates = get_conversion_rates();
@@ -141,4 +100,47 @@ function alterCharacterCurrency(html) {
 function independentCurrency() {
     CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
     };
+}
+
+// Compatibility: Tidy5E
+
+Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
+    if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
+        alterCharacterCurrency(html);
+    }
+});
+
+// Compatibility: Let's Trade 5E
+Hooks.on('renderTradeWindow', (sheet, html) => {
+    alterTradeWindowCurrency(html);
+});
+
+Hooks.on('renderDialog', (sheet, html) => {
+    if (game.modules.get('5e-custom-currency')?.active && sheet.title === 'Incoming Trade Request') {
+        alterTradeDialogCurrency(html);
+    }
+});
+
+function alterTradeDialogCurrency(html) {
+    let altNames = fetchParams();
+
+    const content = html.find('.dialog-content p');
+    const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
+    if (match) content.text(content.text().replace(match[1], ' ' + altNames[match[2] + "Alt"] + '.'));
+}
+
+function alterTradeWindowCurrency(html) {
+    let altNames = fetchParams();
+
+    ['pp', 'gp', 'ep', 'sp', 'cp'].forEach(dndCurrency => {
+        const container = html.find('[data-coin="' + dndCurrency + '"]').parent();
+        if (!container.length) return;
+
+        for (const [k, n] of Object.entries(container.contents())) {
+            if (n.nodeType === Node.TEXT_NODE) n.remove();
+        }
+
+        container.append(' ' + altNames[dndCurrency + "AltAbrv"]);
+        container.attr('title', altNames[dndCurrency + "Alt"]);
+    });
 }
