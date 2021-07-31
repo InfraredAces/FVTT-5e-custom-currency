@@ -6,7 +6,7 @@ Hooks.once("init", () => {
 
     registerSettings();
 });
-  
+
 Hooks.on("ready", function() {
     console.log("5e-custom-currency | Ready");
 
@@ -33,6 +33,8 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
     alterCharacterCurrency(html);
 });
 
+// Compatibility
+
 Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
     if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
         alterCharacterCurrency(html);
@@ -48,67 +50,13 @@ Hooks.on('renderDialog', (sheet, html) => {
         alterTradeDialogCurrency(html);
     }
 });
-  
-export function patch_currencyConversion() {
-    let rates = get_conversion_rates();
 
-    CONFIG.DND5E.currencyConversion = {
-        cp: {into: "sp", each: rates["cp_sp"]},
-        sp: {into: "ep", each: rates["sp_ep"]},
-        ep: {into: "gp", each: rates["ep_gp"]},
-        gp: {into: "pp", each: rates["gp_pp"]}
-    }
-};
-
-function get_conversion_rates() {
-    return {
-        cp_sp: game.settings.get("5e-custom-currency", "cp-sp"),
-        sp_ep: game.settings.get("5e-custom-currency", "sp-ep"),
-        ep_gp: game.settings.get("5e-custom-currency", "ep-gp"),
-        gp_pp: game.settings.get("5e-custom-currency", "gp-pp")
-    }
-}
-
-export function patch_currencyNames() {
+function alterTradeDialogCurrency(html) {
     let altNames = fetchParams();
 
-    CONFIG.DND5E.currencies = {
-        "pp": altNames["ppAlt"],
-        "gp": altNames["gpAlt"],
-        "ep": altNames["epAlt"],
-        "sp": altNames["spAlt"],
-        "cp": altNames["cpAlt"]
-    };
-}
-
-function fetchParams() {
-    return {
-        cpAlt: game.settings.get("5e-custom-currency", "cpAlt"),
-        spAlt: game.settings.get("5e-custom-currency", "spAlt"),
-        epAlt: game.settings.get("5e-custom-currency", "epAlt"),
-        gpAlt: game.settings.get("5e-custom-currency", "gpAlt"),
-        ppAlt: game.settings.get("5e-custom-currency", "ppAlt"),
-        cpAltAbrv: game.settings.get("5e-custom-currency", "cpAltAbrv"),
-        spAltAbrv: game.settings.get("5e-custom-currency", "spAltAbrv"),
-        epAltAbrv: game.settings.get("5e-custom-currency", "epAltAbrv"),
-        gpAltAbrv: game.settings.get("5e-custom-currency", "gpAltAbrv"),
-        ppAltAbrv: game.settings.get("5e-custom-currency", "ppAltAbrv"),
-
-    }
-}
-
-function independentCurrency() {
-    CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
-    };
-}
-
-function alterCharacterCurrency(html) {
-    let altNames = fetchParams();
-    html.find('[class="denomination pp"]').text(altNames["ppAltAbrv"]);
-    html.find('[class="denomination gp"]').text(altNames["gpAltAbrv"]);
-    html.find('[class="denomination ep"]').text(altNames["epAltAbrv"]);
-    html.find('[class="denomination sp"]').text(altNames["spAltAbrv"]);
-    html.find('[class="denomination cp"]').text(altNames["cpAltAbrv"]);
+    const content = html.find('.dialog-content p');
+    const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
+    if (match) content.text(content.text().replace(match[1], ' ' + altNames[match[2] + "Alt"] + '.'));
 }
 
 function alterTradeWindowCurrency(html) {
@@ -127,10 +75,70 @@ function alterTradeWindowCurrency(html) {
     });
 }
 
-function alterTradeDialogCurrency(html) {
+// Function
+
+export function patch_currencyConversion() {
+    let rates = get_conversion_rates();
+}
+
+function get_conversion_rates() {
+    return {
+        cp_sp: game.settings.get("5e-custom-currency", "cp-sp"),
+        sp_ep: game.settings.get("5e-custom-currency", "sp-ep"),
+        ep_gp: game.settings.get("5e-custom-currency", "ep-gp"),
+        gp_pp: game.settings.get("5e-custom-currency", "gp-pp")
+    }
+}
+
+function fetchParams() {
+    return {
+        cpAlt: game.settings.get("5e-custom-currency", "cpAlt"),
+        spAlt: game.settings.get("5e-custom-currency", "spAlt"),
+        epAlt: game.settings.get("5e-custom-currency", "epAlt"),
+        gpAlt: game.settings.get("5e-custom-currency", "gpAlt"),
+        ppAlt: game.settings.get("5e-custom-currency", "ppAlt"),
+        cpAltAbrv: game.settings.get("5e-custom-currency", "cpAltAbrv"),
+        spAltAbrv: game.settings.get("5e-custom-currency", "spAltAbrv"),
+        epAltAbrv: game.settings.get("5e-custom-currency", "epAltAbrv"),
+        gpAltAbrv: game.settings.get("5e-custom-currency", "gpAltAbrv"),
+        ppAltAbrv: game.settings.get("5e-custom-currency", "ppAltAbrv"),
+
+    }
+}
+
+export function patch_currencyConversion() {
+    let rates = get_conversion_rates();
+
+    CONFIG.DND5E.currencyConversion = {
+        cp: {into: "sp", each: rates["cp_sp"]},
+        sp: {into: "ep", each: rates["sp_ep"]},
+        ep: {into: "gp", each: rates["ep_gp"]},
+        gp: {into: "pp", each: rates["gp_pp"]}
+    }
+};
+
+export function patch_currencyNames() {
     let altNames = fetchParams();
 
-    const content = html.find('.dialog-content p');
-    const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
-    if (match) content.text(content.text().replace(match[1], ' ' + altNames[match[2] + "Alt"] + '.'));
+    CONFIG.DND5E.currencies = {
+        "pp": altNames["ppAlt"],
+        "gp": altNames["gpAlt"],
+        "ep": altNames["epAlt"],
+        "sp": altNames["spAlt"],
+        "cp": altNames["cpAlt"]
+    };
+}
+
+function alterCharacterCurrency(html) {
+    let altNames = fetchParams();
+    html.find('[class="denomination pp"]').text(altNames["ppAltAbrv"]);
+    html.find('[class="denomination gp"]').text(altNames["gpAltAbrv"]);
+    html.find('[class="denomination ep"]').text(altNames["epAltAbrv"]);
+    html.find('[class="denomination sp"]').text(altNames["spAltAbrv"]);
+    html.find('[class="denomination cp"]').text(altNames["cpAltAbrv"]);
+}
+
+function independentCurrency() {
+    CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
+    };
 }
