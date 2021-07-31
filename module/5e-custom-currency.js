@@ -34,13 +34,52 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
 });
 
 // Compatibility
+
 Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
     if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
         alterCharacterCurrency(html);
     }
 });
 
+Hooks.on('renderTradeWindow', (sheet, html) => {
+    alterTradeWindowCurrency(html);
+});
+
+Hooks.on('renderDialog', (sheet, html) => {
+    if (game.modules.get('5e-custom-currency')?.active && sheet.title === 'Incoming Trade Request') {
+        alterTradeDialogCurrency(html);
+    }
+});
+
+function alterTradeDialogCurrency(html) {
+    let altNames = fetchParams();
+
+    const content = html.find('.dialog-content p');
+    const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
+    if (match) content.text(content.text().replace(match[1], ' ' + altNames[match[2] + "Alt"] + '.'));
+}
+
+function alterTradeWindowCurrency(html) {
+    let altNames = fetchParams();
+
+    ['pp', 'gp', 'ep', 'sp', 'cp'].forEach(dndCurrency => {
+        const container = html.find('[data-coin="' + dndCurrency + '"]').parent();
+        if (!container.length) return;
+
+        for (const [k, n] of Object.entries(container.contents())) {
+            if (n.nodeType === Node.TEXT_NODE) n.remove();
+        }
+
+        container.append(' ' + altNames[dndCurrency + "AltAbrv"]);
+        container.attr('title', altNames[dndCurrency + "Alt"]);
+    });
+}
+
 // Function
+
+export function patch_currencyConversion() {
+    let rates = get_conversion_rates();
+}
 
 function get_conversion_rates() {
     return {
