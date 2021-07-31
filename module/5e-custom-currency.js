@@ -36,10 +36,6 @@ Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
 
 //  Base Functions
 
-export function patch_currencyConversion() {
-    let rates = get_conversion_rates();
-}
-
 function get_conversion_rates() {
     return {
         cp_sp: game.settings.get("5e-custom-currency", "cp-sp"),
