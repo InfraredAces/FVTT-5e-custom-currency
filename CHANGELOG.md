@@ -30,9 +30,9 @@
 ### 1.3.3
 
 * Added Custom Abbreviations
-* Added funstion to be compatible with Tidy5e Sheet update and D&D 5e OGL Character Sheet
+* Added function to be compatible with Tidy5e Sheet update and D&D 5e OGL Character Sheet
 
 ### 1.3.4
 
-* Added compatibility with Tidy5E NPC sheet
+* Added compatibility with Tidy5E NPC sheet and info card
 * Reorganise code for readability

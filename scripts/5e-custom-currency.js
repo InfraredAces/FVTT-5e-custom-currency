@@ -23,14 +23,14 @@ Hooks.on("ready", function() {
         console.log("5e-custom-currency | Using Independent Currencies");
         independentCurrency();
     }
+
 });
 
 Hooks.on('renderActorSheet5eCharacter', (sheet, html) => {
     if(!game.settings.get("5e-custom-currency", "depCur")) {
-        html.find('[class="currency-convert-button"]').remove();
-        html.find('[data-action="convertCurrency"]').remove();
-        html.find('[title="Convert Currency"]').remove();
+        removeConvertCurrency(html);
     }
+
     alterCharacterCurrency(html);
 });
 
@@ -69,7 +69,7 @@ export function patch_currencyConversion() {
         sp: {into: "ep", each: rates["sp_ep"]},
         ep: {into: "gp", each: rates["ep_gp"]},
         gp: {into: "pp", each: rates["gp_pp"]}
-    }
+    };
 };
 
 export function patch_currencyNames() {
@@ -86,6 +86,7 @@ export function patch_currencyNames() {
 
 function alterCharacterCurrency(html) {
     let altNames = fetchParams();
+
     html.find('[class="denomination pp"]').text(altNames["ppAltAbrv"]);
     html.find('[class="denomination gp"]').text(altNames["gpAltAbrv"]);
     html.find('[class="denomination ep"]').text(altNames["epAltAbrv"]);
@@ -98,11 +99,35 @@ function independentCurrency() {
     };
 }
 
+function removeConvertCurrency(html) {
+    html.find('[class="currency-item convert"]').remove();
+    html.find('[data-action="convertCurrency"]').remove();
+    html.find('[title="Convert Currency"]').remove();
+}
+
+// Import
+import { registerSettings } from "./settings.js";
+import * as customCurrency from "./5e-custom-currency"
+
+
 // Compatibility: Tidy5E
 
 Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
     if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
-        alterCharacterCurrency(html);
+        customCurrency.alterCharacterCurrency(html);
+    }
+});
+
+Hooks.on("ready", function() {
+    let altNames = customCurrency.fetchParams();
+
+    if (game.modules.get('tidy5e-sheet')?.active) {
+        console.log("5e-custom-currency | Altering TIDY5E");
+        game.i18n['translations']['TIDY5E']["CurrencyAbbrPP"] = altNames["ppAltAbrv"]
+        game.i18n['translations']['TIDY5E']["CurrencyAbbrGP"] = altNames["gpAltAbrv"]
+        game.i18n['translations']['TIDY5E']["CurrencyAbbrEP"] = altNames["epAltAbrv"]
+        game.i18n['translations']['TIDY5E']["CurrencyAbbrSP"] = altNames["spAltAbrv"]
+        game.i18n['translations']['TIDY5E']["CurrencyAbbrCP"] = altNames["cpAltAbrv"]
     }
 });
 
@@ -111,6 +136,7 @@ Hooks.on('renderTradeWindow', (sheet, html) => {
     alterTradeWindowCurrency(html);
 });
 
+
 Hooks.on('renderDialog', (sheet, html) => {
     if (game.modules.get('5e-custom-currency')?.active && sheet.title === 'Incoming Trade Request') {
         alterTradeDialogCurrency(html);
@@ -118,7 +144,7 @@ Hooks.on('renderDialog', (sheet, html) => {
 });
 
 function alterTradeDialogCurrency(html) {
-    let altNames = fetchParams();
+    let altNames = customCurrency.fetchParams();
 
     const content = html.find('.dialog-content p');
     const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
@@ -126,7 +152,7 @@ function alterTradeDialogCurrency(html) {
 }
 
 function alterTradeWindowCurrency(html) {
-    let altNames = fetchParams();
+    let altNames = customCurrency.fetchParams();
 
     ['pp', 'gp', 'ep', 'sp', 'cp'].forEach(dndCurrency => {
         const container = html.find('[data-coin="' + dndCurrency + '"]').parent();
