@@ -109,12 +109,12 @@ function removeConvertCurrency(html) {
 
 Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
     if (game.modules.get('tidy5e-sheet')?.active && sheet.constructor.name === 'Tidy5eNPC') {
-        customCurrency.alterCharacterCurrency(html);
+        alterCharacterCurrency(html);
     }
 });
 
 Hooks.on("ready", function() {
-    let altNames = customCurrency.fetchParams();
+    let altNames = fetchParams();
 
     if (game.modules.get('tidy5e-sheet')?.active) {
         console.log("5e-custom-currency | Altering TIDY5E");
@@ -139,7 +139,7 @@ Hooks.on('renderDialog', (sheet, html) => {
 });
 
 function alterTradeDialogCurrency(html) {
-    let altNames = customCurrency.fetchParams();
+    let altNames = fetchParams();
 
     const content = html.find('.dialog-content p');
     const match = content.text().match(/.+ is sending you [0-9]+((pp|gp|ep|sp|cp) \.).+/);
@@ -147,7 +147,7 @@ function alterTradeDialogCurrency(html) {
 }
 
 function alterTradeWindowCurrency(html) {
-    let altNames = customCurrency.fetchParams();
+    let altNames = fetchParams();
 
     ['pp', 'gp', 'ep', 'sp', 'cp'].forEach(dndCurrency => {
         const container = html.find('[data-coin="' + dndCurrency + '"]').parent();
