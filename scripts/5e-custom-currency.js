@@ -95,7 +95,7 @@ function alterCharacterCurrency(html) {
 }
 
 function independentCurrency() {
-    CONFIG.Actor.entityClass.prototype.convertCurrency = function () {
+    CONFIG.Actor.documentClass.prototype.convertCurrency = function () {
     };
 }
 
