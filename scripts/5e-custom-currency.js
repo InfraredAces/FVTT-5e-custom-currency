@@ -105,11 +105,6 @@ function removeConvertCurrency(html) {
     html.find('[title="Convert Currency"]').remove();
 }
 
-// Import
-import { registerSettings } from "./settings.js";
-import * as customCurrency from "./5e-custom-currency"
-
-
 // Compatibility: Tidy5E
 
 Hooks.on('renderActorSheet5eNPC', (sheet, html) => {
