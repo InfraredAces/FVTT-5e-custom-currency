@@ -26,6 +26,7 @@ Currently supports any dnd5e character sheet that uses the default currency name
 * Tidy5e Sheet
 * DNDBeyond Character Sheet for 5e
 * D&D 5e OGL Character Sheet
+* Party Overview
 
 ### Not Compatible
 
