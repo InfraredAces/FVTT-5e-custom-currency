@@ -161,3 +161,20 @@ function alterTradeWindowCurrency(html) {
         container.attr('title', altNames[dndCurrency + "Alt"]);
     });
 }
+
+// Compatibility: Party Overview
+Hooks.on('renderPartyOverviewApp', (sheet, html) => {
+    alterPartyOverviewWindowCurrency(html);
+});
+
+function alterPartyOverviewWindowCurrency(html) {
+    let altNames = fetchParams();
+
+    const currencies = html.find('div[data-tab="currencies"] div.table-row.header div.text.icon')
+    $(currencies[0]).text(altNames["ppAlt"])
+    $(currencies[1]).text(altNames["gpAlt"])
+    $(currencies[2]).text(altNames["epAlt"])
+    $(currencies[3]).text(altNames["spAlt"])
+    $(currencies[4]).text(altNames["cpAlt"])
+    $(currencies[5]).text(`${altNames["gpAlt"]} (${game.i18n.localize('party-overview.TOTAL')})`)
+}
